@@ -1,8 +1,12 @@
 Update log
 
 --TASKS TO DO--
-  •Character concepts
-  •Character skill trees
+
+  Prioritise for week (17 Feb - 24 Feb)
+    •Change movemnt script so it is different with each character
+    •Menu
+    •Enemy object, auto aiming/ aim assist
+  
  
  --COMPLETED--
   •Basic character movement
