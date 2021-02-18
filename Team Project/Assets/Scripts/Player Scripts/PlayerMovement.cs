@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float sprintSpeed;
-    [SerializeField] private float cooldownTime;
+    [Header("Player Movement")]
+    [SerializeField] protected float movementSpeed = 2.0f;
+    [SerializeField] private float speedMulitplier;
+
+    [Header("Ability Settings")]
+    [SerializeField] protected float cooldownTime;
     private float nextUseTime = 0.0f;
     public Rigidbody2D rd2d;
 
@@ -14,6 +17,15 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {//check for user input
+        CheckInput();
+    }
+    void FixedUpdate()
+    {//move the character
+        Move();
+    }
+
+    protected void CheckInput()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -48,8 +60,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    void FixedUpdate()
-    {//move the character
+
+    protected void Move()
+    {
         rd2d.MovePosition(rd2d.position + movement.normalized * movementSpeed * Time.deltaTime);
     }
 }
