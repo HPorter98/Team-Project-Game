@@ -3,8 +3,12 @@ Update log
 --TASKS TO DO--
 
   Prioritise for week (17 Feb - 24 Feb)
+
     •Change movemnt script so it is different with each character
+        -Added inheritance. This allows unique changes to the character while the over feel of the game is the same.
+
     •Menu
+    
     •Enemy object, auto aiming/ aim assist
   
  
