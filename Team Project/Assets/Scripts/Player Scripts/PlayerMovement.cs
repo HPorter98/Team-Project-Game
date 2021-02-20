@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 movement;
 
-    // Update is called once per frame
     void Update()
     {//check for user input
         CheckInput();
@@ -29,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        CalculateSpriteDirection(movement.x, movement.y);
 
         if (Input.GetKeyDown("left shift"))
         {//Increase speed for a Sprint
@@ -61,9 +62,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CalculateSpriteDirection(float x, float y)
+    {
+        if (x >= 0.01)
+        {//Set sprite to face right
+            transform.localEulerAngles = new Vector3(1, 1, -90);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (x <= -0.01)
+        {//set sprite to face left
+            transform.localEulerAngles = new Vector3(1, 1, 90);
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (y >= 0.01)
+        {//set sprite to face forward (default)
+            transform.localEulerAngles = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (y <= -0.01)
+        {//set sprite to face backwards
+            transform.localEulerAngles = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, -1, 1);
+        }
+    }
+
     protected void Move()
     {
-
         rd2d.MovePosition(rd2d.position + movement.normalized * movementSpeed * Time.deltaTime);
     }
 }
