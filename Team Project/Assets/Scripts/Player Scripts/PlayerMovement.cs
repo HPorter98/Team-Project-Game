@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected void Move()
     {
+
         rd2d.MovePosition(rd2d.position + movement.normalized * movementSpeed * Time.deltaTime);
     }
 }
