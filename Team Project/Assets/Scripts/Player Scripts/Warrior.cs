@@ -2,26 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warrior : PlayerMovement
+public class Warrior : PlayerManager
 {
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        CheckInput(); //Method from base class to check for user input
-
-        if (Input.GetKeyDown("f"))
-        {
-            KeyPush();
-        }
-    }
 
     private void FixedUpdate()
     {
-        Move(); //Method from base class to move
     }
 
     private void KeyPush()

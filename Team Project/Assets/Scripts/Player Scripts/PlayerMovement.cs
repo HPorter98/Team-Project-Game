@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,61 +13,40 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ability Settings")]
     [SerializeField] protected float cooldownTime;
-    private float nextUseTime = 0.0f;
+    //private float nextUseTime = 0.0f;
+
     public Rigidbody2D rd2d;
+    public bool isSprinting = false;
 
     Vector2 movement;
+    public NewInputManager inputManager;
 
-    void Update()
-    {//check for user input
-        CheckInput();
-    }
-    void FixedUpdate()
-    {//move the character
-        Move();
-    }
-
-    protected void CheckInput()
+    private void Awake()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        inputManager = new NewInputManager();
+        inputManager.Player.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
+        inputManager.Player.Skip_Scene.performed += _ => SkipScene();
+    }
 
+    void OnEnable()
+    {
+        inputManager.Enable();
+    }
+
+    void OnDisable()
+    {
+        inputManager.Disable();
+    }
+
+    void FixedUpdate()
+    {
+        Move(movement);
         CalculateSpriteDirection(movement.x, movement.y);
-
-        if (Input.GetKeyDown("left shift"))
-        {//Increase speed for a Sprint
-            movementSpeed *= 1.5f;
-        }
-        else if (Input.GetKeyUp("left shift"))
-        {//Decrease speed back to a walk
-            movementSpeed /= 1.5f;
-        }
-        else if (Input.GetKeyDown("space"))
-        {//Press space for a dash
-            if (Time.time > nextUseTime)
-            {//If it is not on cooldown
-                if (movement.x == 1)
-                {
-                    rd2d.position = new Vector3(transform.position.x + 5.0f, transform.position.y + 0);
-                    nextUseTime = Time.time + cooldownTime;
-                }
-                else if (movement.x == -1)
-                {
-                    rd2d.position = new Vector3(transform.position.x + -5.0f, transform.position.y + 0);
-                    nextUseTime = Time.time + cooldownTime;
-                }
-                Debug.Log("Cooldown started");
-            }
-            else if (Time.time < nextUseTime)
-            {//If it is on cooldown
-                Debug.Log("Cooldown active");
-            }
-        }
     }
 
     void CalculateSpriteDirection(float x, float y)
     {
-        if (x >= 0.01)
+        if (x == 1.0)
         {//Set sprite to face right
             transform.localEulerAngles = new Vector3(1, 1, -90);
             transform.localScale = new Vector3(1, 1, 1);
@@ -86,8 +68,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    protected void Move()
+    public void Move(Vector2 movement)
+    {//move the character
+        rd2d.MovePosition(rd2d.position + movement * movementSpeed * Time.deltaTime);
+    }
+
+    void SkipScene()
     {
-        rd2d.MovePosition(rd2d.position + movement.normalized * movementSpeed * Time.deltaTime);
+        Debug.Log("Skipping Scene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
