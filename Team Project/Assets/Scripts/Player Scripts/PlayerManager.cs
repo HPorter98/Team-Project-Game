@@ -61,19 +61,37 @@ public class PlayerManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        else if (collision.transform.tag == "Potion")
+        //else if (collision.transform.tag == "Potion")
+        //{
+        //    if (health < 100f)
+        //    {//if player is injured
+        //        health += collision.transform.GetComponent<PickUp>().healthValue;
+        //        if (health > 100f)
+        //        {//if health exceeds 100
+        //            health = 100f;
+        //            textHealth.text = health.ToString();
+        //        }
+        //        textHealth.text = health.ToString();
+        //    }
+
+        //    Destroy(collision.gameObject);
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.tag == "Potion")
         {
-            if (health < 100f)
-            {//if player is injured
+            if(health < 100f)
+            {
                 health += collision.transform.GetComponent<PickUp>().healthValue;
                 if (health > 100f)
-                {//if health exceeds 100
+                {
                     health = 100f;
                     textHealth.text = health.ToString();
                 }
                 textHealth.text = health.ToString();
             }
-
             Destroy(collision.gameObject);
         }
     }
