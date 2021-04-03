@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] protected float startingHealth = 100f;
     [SerializeField] protected float startingMana = 100f;
     [SerializeField] protected float startingStamina = 100f;
+    [SerializeField] protected float attackDamage = 25f;
+    [SerializeField] protected Transform attackPos;
+    [SerializeField] protected float attackRange = 1;
+    [SerializeField] protected LayerMask whatIsEnemy;
 
     [Header("Cooldowns")]
     [SerializeField] protected float sprintCooldown = 0.0f;
@@ -61,21 +65,6 @@ public class PlayerManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        //else if (collision.transform.tag == "Potion")
-        //{
-        //    if (health < 100f)
-        //    {//if player is injured
-        //        health += collision.transform.GetComponent<PickUp>().healthValue;
-        //        if (health > 100f)
-        //        {//if health exceeds 100
-        //            health = 100f;
-        //            textHealth.text = health.ToString();
-        //        }
-        //        textHealth.text = health.ToString();
-        //    }
-
-        //    Destroy(collision.gameObject);
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -99,5 +88,21 @@ public class PlayerManager : MonoBehaviour
     public float ReturnStamina()
     {
         return stamina;
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Attack!");
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemy);
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+        {
+            enemiesToDamage[i].GetComponent<EnemyManager>().TakeDamage(attackDamage);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 }

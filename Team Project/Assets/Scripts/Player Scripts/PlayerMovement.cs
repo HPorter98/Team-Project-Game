@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         inputManager = new NewInputManager();
         inputManager.Player.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         inputManager.Player.Skip_Scene.performed += _ => SkipScene();
+        inputManager.Player.Attack.performed += _ => gameObject.GetComponent<PlayerManager>().Attack();
     }
 
     void OnEnable()

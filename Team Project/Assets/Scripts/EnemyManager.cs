@@ -6,6 +6,7 @@ using Pathfinding;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] float attackDamage = 25f;
+    [SerializeField] float health = 100f;
 
     public GameObject player;
     public GameObject startPos;
@@ -15,10 +16,13 @@ public class EnemyManager : MonoBehaviour
     Vector3 triggerDistance = new Vector3(10, 10, 0);
     // Start is called before the first frame update
     CharacterController controller;
+    Transform healthBarAnchor;
     void Start()
     {
         enemyPos = transform.position;
         gameObject.GetComponent<AIDestinationSetter>().target = null;
+        healthBarAnchor = transform.Find("Bar");
+        healthBarAnchor.localScale = new Vector3(0.25f, 0);
 
     }
 
@@ -37,10 +41,6 @@ public class EnemyManager : MonoBehaviour
 
     public void PlayerDetection()
     {
-        //if (Vector2.Distance(transform.position, player.transform.position) < 5f)
-        //{
-        //    gameObject.GetComponent<MeshRenderer>().enabled = true;
-        //}
         if (Vector2.Distance(transform.position, player.transform.position) < 5f)
         {
             Debug.Log("Player Detected");
@@ -54,6 +54,18 @@ public class EnemyManager : MonoBehaviour
             {
                 gameObject.GetComponent<AIPath>().enabled = false;
             }
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        Debug.Log("Enemy health is now " + health);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

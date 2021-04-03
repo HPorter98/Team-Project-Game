@@ -22,12 +22,12 @@
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "Attack",
+                    "type": "PassThrough",
                     "id": "66109fce-b42c-416d-b714-89f42e0dc05d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Key",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -225,7 +225,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch Control",
-                    "action": "New action",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dff503d-955b-46c8-b0ac-33cb3895e3b6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
