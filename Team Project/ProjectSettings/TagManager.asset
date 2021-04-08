@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Potion
   - Enemy
+  - Mana Potion
+  - Health Potion
+  - Speed Potion
+  - Health
+  - Mana
+  - Speed
   layers:
   - Default
   - TransparentFX
@@ -24,7 +30,7 @@ TagManager:
   - Checkpoints
   - Obstacle
   - Enemy
-  - 
+  - CameraBounds
   - 
   - 
   - 

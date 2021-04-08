@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Wall_Tileset_Mossy_Ready
+  m_Name: Brick_Wall_tileset_Ready 1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 25c2b36380769c14a8f90558c04b4cc8, type: 3}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3a209d7c8a57c834c9a61314f9eccda8, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Transform:
     e00: 1
     e01: 0

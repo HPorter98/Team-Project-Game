@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2066270707379580155}
   - component: {fileID: 2066270707379580154}
   - component: {fileID: 2066270707379580153}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 69d08f35bd3cd1642a4397d29d847fa5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.33931115, g: 0.54205906, b: 0.5754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 2
-  endReachedDistance: 2
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -215,5 +215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 25
+  health: 100
+  attackPixel: {fileID: 1752695064030137916, guid: 10b4dedc63f76694883b3c4a951f1cc6,
+    type: 3}
   player: {fileID: 0}
   startPos: {fileID: 0}

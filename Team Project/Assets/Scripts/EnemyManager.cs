@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] float attackDamage = 25f;
     [SerializeField] float health = 100f;
+    [SerializeField] GameObject attackPixel;
 
     public GameObject player;
     public GameObject startPos;
@@ -21,8 +22,8 @@ public class EnemyManager : MonoBehaviour
     {
         enemyPos = transform.position;
         gameObject.GetComponent<AIDestinationSetter>().target = null;
-        healthBarAnchor = transform.Find("Bar");
-        healthBarAnchor.localScale = new Vector3(0.25f, 0);
+        //healthBarAnchor = transform.Find("Bar");
+        //healthBarAnchor.localScale = new Vector3(0.25f, 0);
 
     }
 
@@ -50,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         if (Vector2.Distance(transform.position, player.transform.position) > 5f && transform.position != enemyPos)
         {
             gameObject.GetComponent<AIDestinationSetter>().target = startPos.transform;
-            if (Vector2.Distance(transform.position, startPos.transform.position) < 2f)
+            if (Vector2.Distance(transform.position, startPos.transform.position) <= 0.01f)
             {
                 gameObject.GetComponent<AIPath>().enabled = false;
             }
@@ -60,6 +61,7 @@ public class EnemyManager : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Instantiate(attackPixel, transform);
 
         Debug.Log("Enemy health is now " + health);
 

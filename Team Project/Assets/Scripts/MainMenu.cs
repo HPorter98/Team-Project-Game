@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject Player;
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -23,5 +24,11 @@ public class MainMenu : MonoBehaviour
     public void SkipScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartScene()
+    {
+        Player.GetComponent<PlayerManager>().Respawn();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
