@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -23,15 +24,19 @@ public class PlayerManager : MonoBehaviour
     public TMPro.TextMeshProUGUI textStamina;
     public TMPro.TextMeshProUGUI textMana;
     public TMPro.TextMeshProUGUI textBoots;
+    public TMPro.TextMeshProUGUI textDamage;
+    public TMPro.TextMeshProUGUI textArmour;
 
     static float health = 0.0f;
     static float mana = 0.0f;
     static float stamina = 0.0f;
 
-    private bool isSpriting;
     private bool speedBoost;
+
     private float speed;
     private float startingCooldown;
+    private float damageResistance;
+
     private PlayerMovement playerMove;
 
     // Start is called before the first frame update
@@ -52,6 +57,9 @@ public class PlayerManager : MonoBehaviour
 
         startingCooldown = cooldown;
         textBoots.enabled = false;
+        textDamage.enabled = false;
+        textArmour.enabled = false;
+
 
     }
 
@@ -78,15 +86,20 @@ public class PlayerManager : MonoBehaviour
         {
             playerMove.movementSpeed = speed * 1.25f;
         }
+        //if (attackBoost == true)
+        //{
+        //    attackDamage = attackDamage * 1.25f;
+        //    Debug.Log(attackDamage);
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        float attackDamage;
+        float Damage;
         if (collision.transform.tag == "Enemy")
         {
-            attackDamage = collision.transform.GetComponent<EnemyManager>().Attack();
-            health -= attackDamage;
+            Damage = collision.transform.GetComponent<EnemyManager>().Attack() - damageResistance;
+            health -= Damage;
             textHealth.text = health.ToString();
 
             if (health <= 0)
@@ -110,11 +123,11 @@ public class PlayerManager : MonoBehaviour
                     textHealth.text = health.ToString();
                 }
                 textHealth.text = health.ToString();
+                Destroy(collision.gameObject);
             }
-            Destroy(collision.gameObject);
         }
 
-        else if (collision.transform.CompareTag("Mana"))
+        if (collision.transform.CompareTag("Mana"))
         {
             if (mana < 100f)
             {
@@ -125,15 +138,30 @@ public class PlayerManager : MonoBehaviour
                     textMana.text = mana.ToString();
                 }
                 textMana.text = mana.ToString();
+                Destroy(collision.gameObject);
             }
-            Destroy(collision.gameObject);
         }
 
-        else if (collision.transform.CompareTag("Speed"))
+        if (collision.transform.CompareTag("Speed"))
         {
             speedBoost = true;
             speed = playerMove.movementSpeed;
             textBoots.enabled = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.transform.CompareTag("Sword"))
+        {
+            attackDamage = attackDamage * 1.25f;
+            textDamage.enabled = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.transform.CompareTag("Armour"))
+        {
+
+            damageResistance = 25 / 3;
+            textArmour.enabled = true;
             Destroy(collision.gameObject);
         }
     }

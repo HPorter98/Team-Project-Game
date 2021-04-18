@@ -6,8 +6,15 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject Player;
-    public void PlayGame()
+    public GameObject gameManager;
+
+    private void Start()
     {
+        gameManager = GameObject.Find("GameManager");
+    }
+    public void PlayGame(string characterName)
+    {
+        gameManager.GetComponent<CharacterSelect>().SetCharacterName(characterName);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

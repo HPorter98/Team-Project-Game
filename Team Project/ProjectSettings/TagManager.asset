@@ -12,6 +12,8 @@ TagManager:
   - Health
   - Mana
   - Speed
+  - Sword
+  - Armour
   layers:
   - Default
   - TransparentFX

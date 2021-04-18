@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move(movement);
         CalculateSpriteDirection(movement.x, movement.y);
-        Debug.Log("X = " + movement.x + "," + "Y = " + movement.y);
+        //Debug.Log("X = " + movement.x + "," + "Y = " + movement.y);
     }
 
     void CalculateSpriteDirection(float x, float y)
