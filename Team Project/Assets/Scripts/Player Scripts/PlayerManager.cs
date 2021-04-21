@@ -23,9 +23,10 @@ public class PlayerManager : MonoBehaviour
     public TMPro.TextMeshProUGUI textHealth;
     public TMPro.TextMeshProUGUI textStamina;
     public TMPro.TextMeshProUGUI textMana;
-    public TMPro.TextMeshProUGUI textBoots;
-    public TMPro.TextMeshProUGUI textDamage;
-    public TMPro.TextMeshProUGUI textArmour;
+
+    public Image imgArmour;
+    public Image imgBoots;
+    public Image imgDamage;
 
     static float health = 0.0f;
     static float mana = 0.0f;
@@ -56,9 +57,9 @@ public class PlayerManager : MonoBehaviour
         playerMove = GetComponent<PlayerMovement>();
 
         startingCooldown = cooldown;
-        textBoots.enabled = false;
-        textDamage.enabled = false;
-        textArmour.enabled = false;
+        imgDamage.enabled = false;
+        imgBoots.enabled = false;
+        imgArmour.enabled = false;
 
 
     }
@@ -146,14 +147,14 @@ public class PlayerManager : MonoBehaviour
         {
             speedBoost = true;
             speed = playerMove.movementSpeed;
-            textBoots.enabled = true;
+            imgBoots.enabled = true;
             Destroy(collision.gameObject);
         }
 
         if (collision.transform.CompareTag("Sword"))
         {
             attackDamage = attackDamage * 1.25f;
-            textDamage.enabled = true;
+            imgDamage.enabled = true;
             Destroy(collision.gameObject);
         }
 
@@ -161,7 +162,7 @@ public class PlayerManager : MonoBehaviour
         {
 
             damageResistance = 25 / 3;
-            textArmour.enabled = true;
+            imgArmour.enabled = true;
             Destroy(collision.gameObject);
         }
     }
