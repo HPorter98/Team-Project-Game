@@ -9,6 +9,7 @@ public class CharacterSelect : MonoBehaviour
     public string characterName;
     void Start()
     {
+        //This game object stays alive while going between levels
         DontDestroyOnLoad(this.gameObject);
     }
 

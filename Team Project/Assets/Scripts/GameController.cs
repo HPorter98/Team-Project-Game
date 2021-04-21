@@ -16,8 +16,14 @@ public class GameController : MonoBehaviour
 
     void SpawnPlayer()
     {
+        //spawn position of player
         Vector2 startPos = new Vector2(0, 0);
+
+
+        //find game manager
         GameObject gameManager = GameObject.Find("GameManager");
+
+        //get character type from character select script
         playerName = gameManager.GetComponent<CharacterSelect>().GetCharacterName();
         if (playerName == "Warrior")
         {
