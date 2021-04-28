@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     private float damageResistance;
 
     private GameObject respawnButton;
+    private GameObject lvlComplete;
 
     private TMPro.TextMeshProUGUI textHealth;
     private TMPro.TextMeshProUGUI textStamina;
@@ -158,12 +159,18 @@ public class PlayerManager : MonoBehaviour
 
         if (collision.transform.CompareTag("Armour"))
         {
-
             damageResistance = 25 / 3;
             imgArmour.enabled = true;
             Destroy(collision.gameObject);
         }
+
+        if (collision.transform.CompareTag("Finish"))
+        {
+            lvlComplete.SetActive(true);
+        }
     }
+
+
 
     public virtual void Attack()
     {
@@ -194,11 +201,13 @@ public class PlayerManager : MonoBehaviour
         textHealth = GameObject.Find("Health").GetComponent<TMPro.TextMeshProUGUI>();
         textStamina = GameObject.Find("Stamina").GetComponent<TMPro.TextMeshProUGUI>();
         textMana = GameObject.Find("Mana").GetComponent<TMPro.TextMeshProUGUI>();
+        lvlComplete = GameObject.Find("LevelCompleted");
 
         //Set values of each text component
         textHealth.text = health.ToString();
         textStamina.text = stamina.ToString();
         textMana.text = mana.ToString();
+        lvlComplete.SetActive(false);
 
         //Find each image component in the current scene
         imgDamage = GameObject.Find("SwordImg").GetComponent<Image>();
