@@ -17,16 +17,6 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Cooldowns")]
     [SerializeField] protected float cooldown = 0.0f;
-    
-
-    [Header("Canvas")]
-    public TMPro.TextMeshProUGUI textHealth;
-    public TMPro.TextMeshProUGUI textStamina;
-    public TMPro.TextMeshProUGUI textMana;
-
-    public Image imgArmour;
-    public Image imgBoots;
-    public Image imgDamage;
 
     static float health = 0.0f;
     static float mana = 0.0f;
@@ -38,7 +28,18 @@ public class PlayerManager : MonoBehaviour
     private float startingCooldown;
     private float damageResistance;
 
+    private GameObject respawnButton;
+
+    private TMPro.TextMeshProUGUI textHealth;
+    private TMPro.TextMeshProUGUI textStamina;
+    private TMPro.TextMeshProUGUI textMana;
+
+    public Image imgArmour;
+    public Image imgBoots;
+    public Image imgDamage;
+
     private PlayerMovement playerMove;
+    public Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -50,16 +51,11 @@ public class PlayerManager : MonoBehaviour
             mana = startingMana;
         }
 
-        textHealth.text = health.ToString();
-        textStamina.text = stamina.ToString();
-        textMana.text = mana.ToString();
+        SetGUI();
 
         playerMove = GetComponent<PlayerMovement>();
 
         startingCooldown = cooldown;
-        imgDamage.enabled = false;
-        imgBoots.enabled = false;
-        imgArmour.enabled = false;
 
 
     }
@@ -107,6 +103,8 @@ public class PlayerManager : MonoBehaviour
             {
                 textHealth.text = "You Died";
                 gameObject.SetActive(false);
+                respawnButton.SetActive(true);
+
             }
         }
     }
@@ -167,18 +165,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-    public float ReturnStamina()
+    public virtual void Attack()
     {
-        return stamina;
-    }
-
-    public void Attack()
-    {
-        Debug.Log("Attack!");
+        //Find all enemy colliders within range
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemy);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
+            //Attack the enemy
             enemiesToDamage[i].GetComponent<EnemyManager>().TakeDamage(attackDamage);
         }
     }
@@ -186,14 +179,47 @@ public class PlayerManager : MonoBehaviour
     public void Respawn()
     {
         Debug.Log("Respawing");
-        health = 100;
-        mana = 100;
-        stamina = 100;
+        ResetStats();
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
+    }
+
+    void SetGUI()
+    {
+        //Find each text component in the current scene
+        textHealth = GameObject.Find("Health").GetComponent<TMPro.TextMeshProUGUI>();
+        textStamina = GameObject.Find("Stamina").GetComponent<TMPro.TextMeshProUGUI>();
+        textMana = GameObject.Find("Mana").GetComponent<TMPro.TextMeshProUGUI>();
+
+        //Set values of each text component
+        textHealth.text = health.ToString();
+        textStamina.text = stamina.ToString();
+        textMana.text = mana.ToString();
+
+        //Find each image component in the current scene
+        imgDamage = GameObject.Find("SwordImg").GetComponent<Image>();
+        imgArmour = GameObject.Find("ArmourImg").GetComponent<Image>();
+        imgBoots = GameObject.Find("BootsImg").GetComponent<Image>();
+
+        //Set values of each image component
+        imgDamage.enabled = false;
+        imgBoots.enabled = false;
+        imgArmour.enabled = false;
+
+        respawnButton = GameObject.Find("Respawn");
+        respawnButton.SetActive(false);
+
+    }
+
+    public void ResetStats()
+    {
+        //Reset the health, mana and stamina
+        health = 100;
+        mana = 100;
+        stamina = 100;
     }
 }

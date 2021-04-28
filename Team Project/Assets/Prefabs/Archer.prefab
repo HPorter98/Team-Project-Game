@@ -40,12 +40,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2968203364239822318}
   - component: {fileID: 2968203364239822317}
-  - component: {fileID: 2968203364239822320}
   - component: {fileID: 2968203364239822319}
   - component: {fileID: 2968203364239822321}
   - component: {fileID: 1625527890}
+  - component: {fileID: 983705189865658179}
+  - component: {fileID: 1771747948}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Archer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 69d08f35bd3cd1642a4397d29d847fa5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9fe886caad691b344b780f21c3b9e28b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,32 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2968203364239822320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2968203364239822316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f6b7bfde27a614d972184015063e8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  startingMana: 100
-  startingStamina: 100
-  attackDamage: 25
-  attackPos: {fileID: 572079330}
-  attackRange: 0.5
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 65536
-  cooldown: 3
-  textHealth: {fileID: 0}
-  textStamina: {fileID: 0}
-  textMana: {fileID: 0}
-  textBoots: {fileID: 0}
 --- !u!50 &2968203364239822319
 Rigidbody2D:
   serializedVersion: 4
@@ -196,3 +171,49 @@ MonoBehaviour:
   cooldownTime: 0
   rd2d: {fileID: 2968203364239822319}
   isSprinting: 0
+--- !u!114 &983705189865658179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968203364239822316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064143290579d184da680d8c0989f5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  startingMana: 100
+  startingStamina: 100
+  attackDamage: 25
+  attackPos: {fileID: 572079330}
+  attackRange: 1
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+  cooldown: 0
+  imgArmour: {fileID: 0}
+  imgBoots: {fileID: 0}
+  imgDamage: {fileID: 0}
+  canvas: {fileID: 0}
+  arrow: {fileID: 2484508338537018686, guid: 03384a176c981364fa06ea5e1b777c83, type: 3}
+--- !u!95 &1771747948
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968203364239822316}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e598ff69ec737b43b40829185be7768, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

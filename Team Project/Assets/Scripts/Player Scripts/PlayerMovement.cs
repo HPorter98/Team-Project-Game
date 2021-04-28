@@ -55,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(x == 0 && y == -1)
         {//set sprite to face backwards
-            transform.localEulerAngles = new Vector3(1, 1, 1);
-            transform.localScale = new Vector3(1, -1, 1);
+            transform.localEulerAngles = new Vector3(1, 1, -180);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if(x == 1 && y == 0)
         {//Set sprite to face right

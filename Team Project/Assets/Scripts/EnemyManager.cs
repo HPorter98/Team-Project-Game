@@ -22,8 +22,7 @@ public class EnemyManager : MonoBehaviour
     {
         enemyPos = transform.position;
         gameObject.GetComponent<AIDestinationSetter>().target = null;
-        //healthBarAnchor = transform.Find("Bar");
-        //healthBarAnchor.localScale = new Vector3(0.25f, 0);
+        player = GameObject.FindGameObjectWithTag("Player");
 
     }
 

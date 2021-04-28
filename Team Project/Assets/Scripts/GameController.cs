@@ -6,7 +6,9 @@ using Cinemachine;
 public class GameController : MonoBehaviour
 {
     string playerName;
-    public GameObject playerPrefab;
+    public GameObject WarriorPrefab;
+    public GameObject ArcherPrefab;
+
     public CinemachineVirtualCamera camera;
     public void Awake()
     {
@@ -27,9 +29,13 @@ public class GameController : MonoBehaviour
         playerName = gameManager.GetComponent<CharacterSelect>().GetCharacterName();
         if (playerName == "Warrior")
         {
-            Instantiate(playerPrefab, this.transform);
+            Instantiate(WarriorPrefab, this.transform);
             camera.Follow = GetComponentInChildren<Warrior>().transform;
-
+        }
+        if (playerName == "Archer")
+        {
+            Instantiate(ArcherPrefab, this.transform);
+            camera.Follow = GetComponentInChildren<Archer>().transform;
         }
     }
 }

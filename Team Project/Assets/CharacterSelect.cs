@@ -13,12 +13,6 @@ public class CharacterSelect : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(characterName);
-    }
-
     public void SetCharacterName(string character)
     {
         characterName = character;
